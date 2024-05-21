@@ -1,0 +1,66 @@
+.btn{
+    &:link,&:visited{
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;/*we make this when we want to give some paddings  or some heights or widths to elements */
+        /*In line elements are treated like text so if we wnat to center it, we just apply text-align: center; to the parent element */
+        border-radius: 10rem;
+        transition-property: all;/*We say that on a initial state can be transitions on all properties */
+        transition-duration: .2s;
+        position: relative;
+        font-size: $defaul-font-size;
+    }
+    &:hover{
+        transform: translateY(-0.3rem);/*Related to the initial state*/
+        box-shadow: 0 1rem 2rem rgba($color-black, 0.2); /*Making a shadow blurred effect*/
+
+        &::after{
+            transform: scaleX(1.4) scaleY(1.6);/*increase the element*/
+            opacity: 0;
+        
+        }
+
+    }
+    &:active{
+        transform: translateY(-0.1rem);/*Related to the initial state*/
+        box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    }
+    
+    &--white{
+        background-color: $color-white;
+        color: $color-grey-dark;
+        &::after{
+            background-color: $color-white;
+        }
+    }
+    &--green{
+        background-color: $color-primary;
+        color: $color-white;
+        &::after{
+            background-color: $color-primary;
+        }
+    }
+    
+    &::after{ /*this is treated like a btn child*/
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute; /* placing the element behind the actual button, taking the actual button as reference*/
+        top: 0;
+        left: 0;
+        z-index: -1;/*Defines the position of the elements, */
+        /*elements with a lower (or negative) z-index value will be stacked behind elements with higher z-index values. */
+        transition: all .4s;
+    }
+    &--animated{
+        
+        animation-name: moveInBottom;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-out;
+        animation-delay: .75s;
+        animation-fill-mode: backwards; /*Applies the animation styles before animation starts*/
+    }
+}

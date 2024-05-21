@@ -1,0 +1,58 @@
+*,
+*::after,
+*::before{ /*Now the after and before elements get this behavoir*/
+   margin: 0;
+   padding: 0;
+   box-sizing: inherit;/*Will be inherited from the  body property*/
+}
+
+html{
+
+   box-sizing: border-box;
+
+
+   /* font-size: 10px; 1 rem === 10px */
+   /*Defines what 1 rem is*/
+   font-size: 62.5%;/*(10/16), this is used for the case when the user changes the font size so all change accordly*/
+                     //(10/16) == 0.625 * 100 = 62.5%
+   
+   // @include respond(phone){  //width < 600px?
+   //    font-size: 50%;            ////Will be deleted beacause the tab-port media querie will overrides this one
+   // }
+
+   @include respond(tab-land){ //width < 1200px?
+      font-size: 56.25%;   //1rem = 9px 9/16= 56.25%
+   }
+
+   @include respond(tab-port){ //width < 900px?
+      font-size: 50%; //1rem = 8px, 8/16 = 50%
+   }
+
+
+
+
+
+  //Larger screens
+   @include respond(big-desktop){ //width > 1800px?
+      font-size: 75%; //1 rem = 12px   12/16 = 75%
+   }
+
+
+}
+
+body {
+
+   padding: 3rem; /*Applying padding to the entire body, padding is not inherited*/
+   box-sizing: border-box;  
+
+   @include respond(tab-port){//width < 900px?
+      padding: 0;
+   }
+   
+}
+
+
+::selection{
+   background-color: $color-primary;
+   color: $color-white;
+}

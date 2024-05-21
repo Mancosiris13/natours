@@ -1,0 +1,246 @@
+.section-book{
+    padding: 15rem 0 ;
+    
+    background-image: linear-gradient(to right bottom, $color-primary-ligth, $color-primary-dark);
+    display: flex;
+    justify-content: center;
+    
+    &__header{
+        text-align: center;
+    }
+
+    &__content{
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__book{
+        background-image:linear-gradient(105deg, rgba($color-white, .9) 0%,
+                                                rgba($color-white, .9) 50%,
+                                                  transparent 50%) ,url(/img/nat-10.jpg); //clip-path effect with linear-gradient
+
+        background-size: 100%;
+        width: 100%;
+        height: 50rem;
+        border-radius: 3px;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+
+        @include respond(tab-port){  //width < 900px?
+            background-image:linear-gradient(105deg, rgba($color-white, .9) 0%,
+            rgba($color-white, .9) 100%,
+              transparent 50%) ,url(/img/nat-10.jpg); //clip-path effect with linear-gradient
+         }
+
+    }
+
+    &__form{
+        width:50%;
+        padding: 6rem;
+
+        @include respond(tab-port){  //width < 900px?
+             width: 100%;       
+         }
+    }
+
+    &__button{
+       
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: .5rem 1rem;
+        margin-top: 2rem;
+        display: inline-block;/*we make this when we want to give some paddings  or some heights or widths to elements */
+        /*In line elements are treated like text so if we wnat to center it, we just apply text-align: center; to the parent element */
+        border-radius: 10rem;
+        transition-property: all;/*We say that on a initial state can be transitions on all properties */
+        transition-duration: .2s;
+        position: relative;
+        font-size: $defaul-font-size;
+        background-color: $color-primary;
+        color: $color-white;
+        cursor: pointer;
+        border: none;
+
+
+        &::after{
+            background-color: $color-primary;
+        }
+    
+        &:hover{
+        transform: translateY(-0.3rem);/*Related to the initial state*/
+        box-shadow: 0 1rem 2rem rgba($color-black, 0.2); /*Making a shadow blurred effect*/
+
+        &::after{
+            transform: scaleX(1.4) scaleY(1.6);/*increase the element*/
+            opacity: 0;
+        
+        }
+
+    }
+    &:active{
+        transform: translateY(-0.1rem);/*Related to the initial state*/
+        box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    }
+    
+    &::after{ /*this is treated like a btn child*/
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute; /* placing the element behind the actual button, taking the actual button as reference*/
+        top: 0;
+        left: 0;
+        z-index: -1;/*Defines the position of the elements, */
+        /*elements with a lower (or negative) z-index value will be stacked behind elements with higher z-index values. */
+        transition: all .4s;
+    }
+    &--animated{
+        
+        animation-name: moveInBottom;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-out;
+        animation-delay: .75s;
+        animation-fill-mode: backwards; /*Applies the animation styles before animation starts*/
+    }
+
+    }
+
+   
+}
+
+.form{
+
+    &__group{
+        &:not(:last-child){
+            margin-bottom: 2rem;
+
+            @include respond(tab-land){ //width < 1200px?
+                margin-bottom: 0;
+             }
+            
+        }
+
+        &:last-child{
+            @include respond(tab-port){  //width < 900px?
+                display: flex;
+                flex-direction: column;
+             }
+           }   
+       
+        
+    }
+
+    &__input{
+
+        font-size: 1.5rem;
+        font-family: inherit;
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all .3s;
+
+        &:focus{
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black, .1);
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid{ //Trick for the invalid orange border bottom on the inputs
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        &::-webkit-input-placeholder{
+            color: $color-grey-dark-2;
+        }
+    }
+
+    &__label{
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s;
+
+
+    }
+
+    // + Direct next sibling selector, label have to be next to the input
+    // ~ General sibling selector
+    &__input:placeholder-shown + &__label{ //Trick for hidding the label, and when input is starting written show label
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+
+    
+
+    &__radio-group{
+        width: 49%;
+        display: inline-block;
+
+        @include respond(tab-port){  //width < 900px?
+            width: 100%;
+            &:not(:last-child){
+                margin-bottom: .4rem;
+            }
+         }
+      
+    }
+
+    &__radio-input{
+        display: none;
+    }
+
+    
+
+    &__radio-label{
+        font-size: $defaul-font-size;
+        cursor: pointer;
+        position:relative;
+        padding-left: 4.5rem;
+
+      
+
+       
+     
+    }
+
+    &__radio-button{
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+
+
+        &::after{
+            content: "";
+            display: block;
+            height: 1.3rem;
+            width: 1.3rem;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: $color-primary;
+            opacity: 0;
+            transition: opacity .2s;
+        }
+    }
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after {
+        opacity: 1;
+    }
+
+}

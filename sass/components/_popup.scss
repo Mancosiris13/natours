@@ -1,0 +1,211 @@
+.popup{
+
+    background-color: rgba($color-black, .8);
+    padding: 10rem 0;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+
+    transition: all .3s;
+
+    &:target{ //clicking the book now button, this section becomes a target and with this pseudo clas we make it visible
+        opacity: 1;
+        visibility: visible;
+    }
+
+  
+
+    &__content{
+
+        width: 75%;
+        height: 56rem;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        display: flex;
+
+        opacity: 0;
+        transform: scale(.25);
+
+        transition: all .4s .2s;
+       
+
+      
+
+
+
+    }
+
+    &:target &__content{
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+
+
+    &__left{
+        flex: 0 0 33%;
+
+        display: flex;
+        flex-direction: column;
+       
+
+    }
+    &__right{
+        flex: 1;
+        padding: 3rem 5rem;
+
+    }
+
+    &__header{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    &__close-div{
+        display: flex;
+        justify-content: end;
+    }
+    &__close{
+        font-size: 3rem;
+        
+        &:link,
+        &:visited{
+            color: $color-grey-dark;
+            text-decoration: none;
+            line-height: 1;
+            transition: all .2s;
+
+        }
+
+        &:hover{
+            color: $color-primary;
+        }
+
+    }
+
+    &__img{
+        width: 100%;
+        height: 50%;
+        flex: 1;
+        background-size: cover;
+    }
+
+    &__heading{
+        width: 100%;
+        text-align: left;
+        margin-bottom: 1.5rem;
+
+
+    }
+
+    &__important-heading{
+        text-align: left;
+        margin-bottom: 1.5rem;
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    &__text{
+
+      display: flex;
+
+    }
+
+    &__paragraph{
+        font-size: 1.4rem;
+        padding: 1rem 1.5rem;
+        &:not(:last-child){
+            border-right: 1px solid rgba($color-black, .2);
+        }
+        hyphens: auto;
+        text-align: justify;
+    }
+
+    &__btn-div{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__button{
+
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 2rem 4rem;
+            display: inline-block;/*we make this when we want to give some paddings  or some heights or widths to elements */
+            /*In line elements are treated like text so if we wnat to center it, we just apply text-align: center; to the parent element */
+            border-radius: 10rem;
+            transition-property: all;/*We say that on a initial state can be transitions on all properties */
+            transition-duration: .2s;
+            position: relative;
+            font-size: $defaul-font-size;
+            background-color: $color-primary;
+            color: $color-white;
+            cursor: pointer;
+            border: none;
+            margin-top: 2rem;
+
+
+            &::after{
+                background-color: $color-primary;
+            }
+        
+            &:hover{
+            transform: translateY(-0.3rem);/*Related to the initial state*/
+            box-shadow: 0 1rem 2rem rgba($color-black, 0.2); /*Making a shadow blurred effect*/
+    
+            &::after{
+                transform: scaleX(1.4) scaleY(1.6);/*increase the element*/
+                opacity: 0;
+            
+            }
+    
+        }
+        &:active{
+            transform: translateY(-0.1rem);/*Related to the initial state*/
+            box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+        }
+        
+        &::after{ /*this is treated like a btn child*/
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 10rem;
+            position: absolute; /* placing the element behind the actual button, taking the actual button as reference*/
+            top: 0;
+            left: 0;
+            z-index: -1;/*Defines the position of the elements, */
+            /*elements with a lower (or negative) z-index value will be stacked behind elements with higher z-index values. */
+            transition: all .4s;
+        }
+        &--animated{
+            
+            animation-name: moveInBottom;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-out;
+            animation-delay: .75s;
+            animation-fill-mode: backwards; /*Applies the animation styles before animation starts*/
+        }
+    }
+
+
+
+
+
+}

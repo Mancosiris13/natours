@@ -1,0 +1,60 @@
+.header{
+    height: 95vh;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-ligth, 0.8),
+        rgba($color-primary-dark, 0.8)) ,
+         url(../img/hero-small.jpg);/*We have 2 img on background, color on top of the image*/
+    background-size: cover;/* Tries to fit the viewport height*/
+    background-position: top;/*Whatever the Viewport Size, ensures the top part is always shown*/
+    position: relative;/*The origin on the positions of the children elements*/
+    -webkit-clip-path: polygon(0 0 ,100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0 ,100% 0, 100% 75vh, 0 100%);/*Used to make different forms one the container*/
+
+    @media only screen and (min-resolution: 102dpi)and (min-width:37.5em){ // 600/16 = 37.5 em
+        // Whenever the resolution is higher than 192 dots per inch,
+        // the code that is in here, will be applied. 
+
+        background-image: linear-gradient(
+            to right bottom,
+            rgba($color-primary-ligth, 0.8),
+            rgba($color-primary-dark, 0.8)) ,
+             url(../img/hero.jpg);/*We have 2 img on background, color on top of the image*/
+
+    }
+
+    @media only screen and (min-width:125em){ //2000/16 =  125em
+        // Whenever the resolution is higher than 2000 pxthe code that is in here, will be applied. 
+
+        background-image: linear-gradient(
+            to right bottom,
+            rgba($color-primary-ligth, 0.8),
+            rgba($color-primary-dark, 0.8)) ,
+             url(../img/hero.jpg);/*We have 2 img on background, color on top of the image*/
+
+    }
+  
+    &__logo-box{
+        /* It takes as reference to move to its parent element, in this case the header, that has relative position*/
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+    }
+    &__logo{
+
+        height: 3.5rem;
+        /*If there is not width or height set, but there is height or width set , browser figure it out what size to palace
+        on the missing width or height*/
+    }
+    &__text-box{
+        /* It takes as reference to move to its parent element, in this case the header, that has relative position*/
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%,-50%);  /*This property is relative to itself, no the parent and is used to center itself*/
+        text-align: center;
+    }
+
+}
+
+
